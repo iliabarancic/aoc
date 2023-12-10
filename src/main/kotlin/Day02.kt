@@ -1,7 +1,7 @@
 object Day02 {
 
     fun part1(input: List<String>) = input.mapNotNull { isPossible(it) }.sum()
-    fun part2(input: List<String>) = input.sumOf { highestNumber2(it) }
+    fun part2(input: List<String>) = input.sumOf { highestNumber(it) }
 
 
     private fun isPossible(game: String): Int? {
@@ -21,8 +21,7 @@ object Day02 {
 
     private fun getSequenceOfNumberWithColor(record: String) = """(\d+) (blue|red|green)""".toRegex().findAll(record)
 
-
-    private fun highestNumber2(gameLine: String): Int {
+    private fun highestNumber(gameLine: String): Int {
         return getSequenceOfNumberWithColor(gameLine)
             .groupBy({ it.destructured.component2() }, { it.destructured.component1().toInt() })
             .map { it.value.max() }
